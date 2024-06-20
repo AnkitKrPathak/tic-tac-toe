@@ -13,8 +13,8 @@ h1 {
     color: #065a7e;
 }
 .container {
-    margin-top: 70px;
-    height: 70vh;
+    margin-top: 30px;
+    height: 63vh;
     display: flex;
     justify-content: center;
 }
@@ -37,6 +37,7 @@ h1 {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
     font-size: 5vmin;
     color: #d73b39;
+    background-color: #e3d59e;
 }
 
 #reset-btn {
@@ -47,4 +48,34 @@ h1 {
     background-color: rgb(16, 164, 164);
     color: #042836;
     font-weight: 500;
+}
+
+.msg-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#new-btn {
+    margin-top: 10px;
+    height: 40px;
+    width: 100px;
+    border-radius: 1rem;
+    border: none;
+    background-color: rgb(16, 164, 164);
+    color: #042836;
+    font-weight: 500;
+}
+
+#msg {
+    color: #e3d59e;
+    font-size: 25px;
+    font-weight: 550;
+    margin-top: 10px;
+}
+
+.hide {
+    display: none;
 }
