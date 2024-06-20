@@ -5,6 +5,7 @@ let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
 
 let turn0 = true; //playerX, player0
+let count = 0;
 
 const winPatterns = [
   [0, 1, 2],
@@ -18,43 +19,50 @@ const winPatterns = [
 ];
 
 const resetGame = () => {
-    turn0 = true;
-    enableBoxes();
-    msgContainer.classList.add("hide");
+    count = 0;
+  turn0 = true;
+  enableBoxes();
+  msgContainer.classList.add("hide");
 };
 
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
+    count++;
     if (turn0) {
+        box.style.color = "red";
       box.innerText = "O";
       turn0 = false;
     } else {
+        box.style.color = "green";
       box.innerText = "X";
       turn0 = true;
     }
     box.disabled = true;
 
     checkWinner();
+    if(count === 9 && checkWinner() === false) {
+        Draw();
+    }
   });
 });
 
 const disableBoxes = () => {
-    for(let box of boxes) {
-        box.disabled = true;
-    }
-}
+  for (let box of boxes) {
+    box.disabled = true;
+  }
+};
 
 const enableBoxes = () => {
-    for(let box of boxes) {
-        box.disabled = false;
-        box.innerText = "";
-    }
-}
+  for (let box of boxes) {
+    box.disabled = false;
+    box.innerText = "";
+  }
+};
 
 const showWinner = (winner) => {
-    msg.innerText = `Congratulations, Winner is ${winner}!!`;
-    msgContainer.classList.remove("hide");
-    disableBoxes();
+  msg.innerText = `Congratulations, Winner is ${winner}!!`;
+  msgContainer.classList.remove("hide");
+  disableBoxes();
 };
 
 const checkWinner = () => {
@@ -63,13 +71,21 @@ const checkWinner = () => {
     let pos2Val = boxes[pattern[1]].innerText;
     let pos3Val = boxes[pattern[2]].innerText;
 
-    if(pos1Val != "" && pos2Val != "" && pos3Val != "") {
-        if(pos1Val === pos2Val && pos2Val === pos3Val) {
-            showWinner(pos1Val);
-        }
+    if (pos1Val != "" && pos2Val != "" && pos3Val != "") {
+      if (pos1Val === pos2Val && pos2Val === pos3Val) {
+        showWinner(pos1Val);
+        return true;
+      }
     }
   }
+  return false;
 };
 
-newGameBtn.addEventListener("click", resetGame)
+const Draw = () => {
+    msg.innerText = "Congratulations, It's a Draw!!";
+    msgContainer.classList.remove("hide");
+    disableBoxes();
+};
+
+newGameBtn.addEventListener("click", resetGame);
 resetBtn.addEventListener("click", resetGame);
